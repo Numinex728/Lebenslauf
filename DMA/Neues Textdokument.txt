@@ -1,0 +1,14 @@
+SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;
+		SDIV R4, R4;

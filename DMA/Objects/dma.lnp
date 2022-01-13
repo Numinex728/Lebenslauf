@@ -1,0 +1,15 @@
+--cpu Cortex-M3
+".\objects\dma.o"
+".\objects\main.o"
+".\objects\warten.o"
+".\objects\adc.o"
+".\objects\bart.o"
+".\objects\hd44780_i2c.o"
+".\objects\i2c.o"
+".\objects\lcdlearnstonotwork.o"
+".\objects\startup_stm32f10x_cl.o"
+".\objects\system_stm32f10x.o"
+--strict --scatter ".\Objects\dma.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\dma.map" -o .\Objects\dma.axf

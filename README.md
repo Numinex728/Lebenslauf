@@ -5,4 +5,4 @@ Hier ruht Lebenslauf erstellt von @Numinex728 und @LiterallyJan, die Kurs besten
 
 Ein Beispiel was 3 Monate Langeweile und Schlafmangel mit einem anstellen.
 
-Honorable mentions to @Anex.jpg
+Honorable mentions to @Anexjpg

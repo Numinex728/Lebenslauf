@@ -1,20 +1,18 @@
 #include "interrupt.h"
 
-//Interrupt Service Routine ISR
+//Interrupt Service Routine
 void EXTI0_IRQHandler(void){
 	//Clear pending interrupt
 	EXTI->PR |= EXTI_PR_PR0;	
 	
-	uint16_t led_val = GPIOD->IDR &0x1;
-	if(led_val == 0x1){
-		//turn LED off
-		GPIOD->BSRR = GPIO_BSRR_BR0;
-	}
-	else{
-		//Turn LED on
-		GPIOD->BSRR = GPIO_BSRR_BS0;
-	}
+	EXTI0_PIR();
 	
+}
+
+void EXTI0_PIR(void)
+{
+	//Led Anschalten. Ausschalten: GPIOD->BSRR = GPIO_BSRR_BR0;
+	GPIOD->BSRR = GPIO_BSRR_BS0;
 }
 
 /*

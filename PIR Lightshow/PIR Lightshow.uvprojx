@@ -408,6 +408,16 @@
               <FileType>5</FileType>
               <FilePath>.\warten.h</FilePath>
             </File>
+            <File>
+              <FileName>pir.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pir.c</FilePath>
+            </File>
+            <File>
+              <FileName>pir.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pir.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

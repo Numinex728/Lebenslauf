@@ -5,7 +5,7 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.36.0.0
 Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Kai Mrkor THB Flex license: MDK Professional 5.36 (Flex) (mdk_pro) Operation stops: 24 Aug 2023
+License Information: Kai-Uwe Mrkor THB Flex license: MDK Professional 5.36 (Flex) (mdk_pro) Operation stops: 24 Aug 2023
  
 Tool Versions:
 Toolchain:       MDK Professional 5.36 (Flex)  Version: 5.36.0.0
@@ -22,17 +22,33 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 C:\Users\mclab\Documents\PIR Lightshow\PIR Lightshow.uvprojx
-Project File Date:  01/28/2022
+Project File Date:  02/10/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
+assembling startup_stm32f10x_cl.s...
 interrupt.c(42): warning: no newline at end of file [-Wnewline-eof]
          
          ^
 1 warning generated.
 compiling interrupt.c...
-assembling startup_stm32f10x_cl.s...
+warten.c(90): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        TIM7->ARR = (us<<1) -1;
+                  ~ ~~~~~~~~^~
+warten.c(102): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        TIM7->ARR = (ms<<1) -1;
+                  ~ ~~~~~~~~^~
+2 warnings generated.
+compiling warten.c...
+pir.c(38): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        CLEAR_BIT(ADC1->SR, ADC_SR_EOC);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/mclab/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.3.0/Device/Include\stm32f10x.h(8311): note: expanded from macro 'CLEAR_BIT'
+#define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+                                     ~~ ^~~~~~
+1 warning generated.
+compiling pir.c...
 compiling main.c...
 RTE/Device/STM32F107VC/system_stm32f10x.c(167): warning: no previous extern declaration for non-static variable 'AHBPrescTable' [-Wmissing-variable-declarations]
 __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
@@ -42,17 +58,9 @@ __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9}
     ^
 1 warning generated.
 compiling system_stm32f10x.c...
-warten.c(90): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
-        TIM7->ARR = (us<<1) -1;
-                  ~ ~~~~~~~~^~
-warten.c(102): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
-        TIM7->ARR = (ms<<1) -1;
-                  ~ ~~~~~~~~^~
-2 warnings generated.
-compiling warten.c...
 linking...
-Program Size: Code=968 RO-data=352 RW-data=0 ZI-data=1632  
-".\Objects\PIR Lightshow.axf" - 0 Error(s), 4 Warning(s).
+Program Size: Code=1144 RO-data=352 RW-data=0 ZI-data=1632  
+".\Objects\PIR Lightshow.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -79,10 +87,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.5.0
 
    * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
       Source file:   Device\Source\ARM\startup_stm32f10x_cl.s
       Source file:   Device\Source\system_stm32f10x.c
       Include file:  RTE_Driver\Config\RTE_Device.h
-      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
 Build Time Elapsed:  00:00:00
 </pre>
 </body>

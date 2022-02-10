@@ -2,6 +2,7 @@
 ".\objects\interrupt.o"
 ".\objects\main.o"
 ".\objects\warten.o"
+".\objects\pir.o"
 ".\objects\startup_stm32f10x_cl.o"
 ".\objects\system_stm32f10x.o"
 --strict --scatter ".\Objects\PIR Lightshow.sct"

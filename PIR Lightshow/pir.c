@@ -22,8 +22,6 @@ int pir_init(void)
 	while(READ_BIT(ADC1->CR2, ADC_CR2_CAL));
 
 	
-	
-	
 	return 0;
 }
 

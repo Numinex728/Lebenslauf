@@ -1,11 +1,14 @@
 #include "interrupt.h"
 
 //Interrupt Service Routine
-void EXTI0_IRQHandler(void){
+void EXTI4_IRQHandler(void){
 	//Clear pending interrupt
 	EXTI->PR |= EXTI_PR_PR0;	
+	extern uint16_t i;
 	
-	EXTI0_PIR();
+	GPIOD->ODR = i;
+	
+	//EXTI0_PIR();
 	
 }
 

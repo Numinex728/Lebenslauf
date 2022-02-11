@@ -28,28 +28,11 @@ Project File Date:  02/10/2022
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
 assembling startup_stm32f10x_cl.s...
-interrupt.c(42): warning: no newline at end of file [-Wnewline-eof]
+interrupt.c(45): warning: no newline at end of file [-Wnewline-eof]
          
          ^
 1 warning generated.
 compiling interrupt.c...
-warten.c(90): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
-        TIM7->ARR = (us<<1) -1;
-                  ~ ~~~~~~~~^~
-warten.c(102): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
-        TIM7->ARR = (ms<<1) -1;
-                  ~ ~~~~~~~~^~
-2 warnings generated.
-compiling warten.c...
-pir.c(38): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
-        CLEAR_BIT(ADC1->SR, ADC_SR_EOC);
-        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-C:/Users/mclab/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.3.0/Device/Include\stm32f10x.h(8311): note: expanded from macro 'CLEAR_BIT'
-#define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
-                                     ~~ ^~~~~~
-1 warning generated.
-compiling pir.c...
-compiling main.c...
 RTE/Device/STM32F107VC/system_stm32f10x.c(167): warning: no previous extern declaration for non-static variable 'AHBPrescTable' [-Wmissing-variable-declarations]
 __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
             ^
@@ -58,9 +41,36 @@ __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9}
     ^
 1 warning generated.
 compiling system_stm32f10x.c...
+pir.c(36): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        CLEAR_BIT(ADC1->SR, ADC_SR_EOC);
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/mclab/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.3.0/Device/Include\stm32f10x.h(8311): note: expanded from macro 'CLEAR_BIT'
+#define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+                                     ~~ ^~~~~~
+1 warning generated.
+compiling pir.c...
+main.c(10): warning: no previous extern declaration for non-static variable 'i' [-Wmissing-variable-declarations]
+volatile uint16_t i = 0;
+                  ^
+main.c(10): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint16_t i = 0;
+         ^
+main.c(56): warning: unused variable 'j' [-Wunused-variable]
+        uint16_t j = 0;
+                 ^
+2 warnings generated.
+compiling main.c...
+warten.c(90): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        TIM7->ARR = (us<<1) -1;
+                  ~ ~~~~~~~~^~
+warten.c(102): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        TIM7->ARR = (ms<<1) -1;
+                  ~ ~~~~~~~~^~
+2 warnings generated.
+compiling warten.c...
 linking...
-Program Size: Code=1144 RO-data=352 RW-data=0 ZI-data=1632  
-".\Objects\PIR Lightshow.axf" - 0 Error(s), 5 Warning(s).
+Program Size: Code=3572 RO-data=352 RW-data=0 ZI-data=1640  
+".\Objects\PIR Lightshow.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -87,11 +97,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.5.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
-      Source file:   Device\Source\ARM\startup_stm32f10x_cl.s
-      Source file:   Device\Source\system_stm32f10x.c
       Include file:  RTE_Driver\Config\RTE_Device.h
-Build Time Elapsed:  00:00:00
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Source file:   Device\Source\system_stm32f10x.c
+      Source file:   Device\Source\ARM\startup_stm32f10x_cl.s
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

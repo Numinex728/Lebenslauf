@@ -5,6 +5,7 @@
 #include "interrupt.h"
 #include "pir.h"
 
+//Minimaler gemessener Wert Mikro: 1100 0001 1111
 #define MIN_VALUE 0xC1F
 
 volatile uint16_t i = 0;
@@ -17,21 +18,9 @@ int main(void)
 	//PIR Initialisierung
 	pir_init();
 	
-	//Enablen von Port A, B, C, D und E
+	//Enablen von Port A, B, C, D und E und Alternate Function Takt
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN + RCC_APB2ENR_IOPBEN + RCC_APB2ENR_IOPDEN + RCC_APB2ENR_IOPCEN + RCC_APB2ENR_IOPEEN;
 	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
-	//Konfiguration aller vorher gennanten Ports
-	/*
-	MODIFY_REG(GPIOA->CRL, GPIO_CRL_CNF0 + GPIO_CRL_MODE0, GPIO_CRL_MODE0_0);
-	MODIFY_REG(GPIOB->CRL, GPIO_CRL_CNF0 + GPIO_CRL_MODE0, GPIO_CRL_MODE0_0);
-	MODIFY_REG(GPIOC->CRL, GPIO_CRL_CNF0 + GPIO_CRL_MODE0, GPIO_CRL_MODE0_0);
-	MODIFY_REG(GPIOD->CRL, GPIO_CRL_CNF0 + GPIO_CRL_MODE0, GPIO_CRL_MODE0_0);
-	MODIFY_REG(GPIOE->CRL, GPIO_CRL_CNF0 + GPIO_CRL_MODE0, GPIO_CRL_MODE0_0);
-	*/
-	
-	// Eigentlich müssten die Interrupt Routinen eh alles steuern können
-	//MODIFY_REG(AFIO->EXTICR[2], AFIO_EXTICR2_EXTI4, AFIO_EXTICR2_EXTI4_PA);
-	//MODIFY_REG(AFIO->EXTICR[0], AFIO_EXTICR1_EXTI0, AFIO_EXTICR1_EXTI0_PD);
 	
 	AFIO->EXTICR[1] &= 0xFFFFFFF0;
 	AFIO->EXTICR[1] |= AFIO_EXTICR2_EXTI4_PA;
@@ -46,30 +35,35 @@ int main(void)
 	//clear pending interrupt
 	EXTI->PR |= EXTI_PR_PR4;
 	
+	//Einstellen von Ports Dx auf Mode 11 und CNF 00
 	GPIOD->CRL = 0x33333333;
 	GPIOD->CRH = 0x33333333;
-	
-	uint16_t scope = 0xFFF - MIN_VALUE;
-	double stepsize = scope / 12.0;
-	GPIOD->BSRR = GPIO_BSRR_BR0;
+	 
+	//Hierbei soll der minimal gemessene Wert als Startwert verwendet werden. Dieser Wert soll dann auf 12 Ports abgebildet werden
+	//uint16_t scope = 0xFFF - MIN_VALUE;
+	double stepsize = (0xFFF - MIN_VALUE) / 12.0;
 	
 	uint16_t j = 0;
 	while(1)
 	{
-		//GPIOD->BSRR = GPIO_BSRR_BS0;
+		//Nutzen von Mikro Peripherie
 		i = convert();
-		//tim6_wait_ms(3000);
-		//EXTI0_IRQHandler();
-		//GPIOD->ODR = 0xFFFF;
-		//9 Ports, 18 Reihen, 72 Positionen
-		//Max Spannung 2V, Minimale Spannung Mikro: 1100 0001 1111 Stufengröße: 
+		
+		//Ermitteln von benötigter Portmenge via Stepsize
 		i = i - MIN_VALUE;
 		i = (uint16_t)(i / stepsize);
+		
+		//Abbildung von Portmenge auf 2er Potenzen und damit tatsächlich benötigtem Zahlenwert zum Portsetzen
 		i = (uint16_t)(pow(2, i) - 1);
 		
-		//if(j++ % 2)
-		//	GPIOD->ODR = i;
+		if(j++ % 2)
+			GPIOD->ODR = i;
 	}
 	
-	//return 0;
+	//tim6_wait_ms(3000);
+	//EXTI0_IRQHandler();
+	//GPIOD->ODR = 0xFFFF;
+	//GPIOD->BSRR = GPIO_BSRR_BS0;
+	//GPIOD->BSRR = GPIO_BSRR_BR0;
+	//9 Ports, 18 Reihen, 72 Positionen
 }
